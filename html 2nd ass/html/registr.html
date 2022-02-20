@@ -1,0 +1,183 @@
+<<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Registr</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<body style="color:yellow; background-color:blue">
+  <style>
+  .btn {
+  display: inline-block; /* Строчно-блочный элемент */
+  background: #8C959D; /* Серый цвет фона */
+  color: #fff; /* Белый цвет текста */
+  padding: 1rem 1.5rem; /* Поля вокруг текста */
+  text-decoration: none; /* Убираем подчёркивание */
+  border-radius: 3px; /* Скругляем уголки */
+ }
+  </style>
+  </head>
+  <body>
+    <div class="container"><br><br>
+      <h1 class="text-center text-warning"> Registration Form </h1>
+      <div class="col-lg-8 m-auto d-block">
+          <form>
+              <div class="form-group">
+                <label for="user"> Username: </label>
+                <input type="text"  name="username" id="usernames" class="form-control" autocomplete="off" placeholder="Username">
+                <h5 id="usercheck"> </h5>
+              </div>
+              <div class="form-group">
+                <label for="password"> Password: </label>
+                <input type="text" name="pass" id="password" class="form-control" autocomplete="off" placeholder="Password">
+                <h5 id="passcheck"> </h5>
+                <label>
+                <input class="password-checkbox" type="checkbox"/>
+                Show me password
+                </label>
+              </div>
+              <div class="form-group">
+                <label for="repeatpassword"> Repeat the password: </label>
+                <input type="text" name="username" id="conpassword" class="form-control" autocomplete="off" placeholder="Repeat the password">
+                <h5 id="conpasscheck"> </h5>
+                <label>
+                <input class="checkbox" type="checkbox"/>
+                Show me password
+                </label>
+              </div>
+              <label>
+              <input id="accept" type="checkbox"/>
+              I agree with all privacy policy
+              </label>
+
+              <a href="index.html" class="btn">Submit</a>
+
+              </div>
+            </form>
+          </div>
+      </div>
+      <<script type="text/javascript">
+        $(document).ready(function(){
+          $('#usercheck').hide();
+          $('#passcheck').hide();
+          $('#conpasscheck').hide();
+          var user_err = true;
+          var pass_err = true;
+          var conpass_err = true;
+
+          $('#usernames').keyup(function(){
+               username_check();
+              });
+             function username_check(){
+             var user_val = $('#usernames').val();
+             if(user_val.length == ''){
+             $('#usercheck').show();
+             $('#usercheck').html("WARNING: Please Fill the username");
+             $('#usercheck').focus();
+             $('#usercheck').css("color","orange");
+             user_err = false;
+             return false;
+             }
+             else{
+                 $('#usercheck').hide();
+               }
+
+               if((user_val.length < 5) || (user_val.length > 14)){
+               $('#usercheck').show();
+               $('#usercheck').html("WARNING: Length should be between 5 and 14");
+               $('#usercheck').focus();
+               $('#usercheck').css("color","orange");
+               user_err = false;
+               return false;
+               }
+               else{
+                   $('#usercheck').hide();
+                 }
+            }
+            $('body').on('click', '.password-checkbox', function(){
+            	if ($(this).is(':checked')){
+            		$('#password').attr('type', 'text');
+            	} else {
+            		$('#password').attr('type', 'password');
+            	}
+            });
+            $('body').on('click', '.checkbox', function(){
+            	if ($(this).is(':checked')){
+            		$('#conpassword').attr('type', 'text');
+            	} else {
+            		$('#conpassword').attr('type', 'password');
+            	}
+            });
+
+            $('#accept').click(function() {
+            	if ($('#submitbtn').is(':disabled')) {
+                	$('#submitbtn').removeAttr('disabled');
+                } else {
+                	$('#submitbtn').attr('disabled', 'disabled');
+                }
+            });
+
+            $('#password').keyup(function(){
+                 password_check();
+                });
+                   function password_check(){
+                   var pass_val = $('#password').val();
+                   if(pass_val.length == ''){
+                   $('#passcheck').show();
+                   $('#passcheck').html("WARNING: Please Fill the password");
+                   $('#passcheck').focus();
+                   $('#passcheck').css("color","orange");
+                   pass_err = false;
+                   return false;
+                   }
+                   else{
+                       $('#passcheck').hide();
+                     }
+
+                     var pass_val = $('#password').val();
+                     if((pass_val.length < 5) || (pass_val.length > 14)){
+                     $('#passcheck').show();
+                     $('#passcheck').html("WARNING: Password should be between 5 and 14");
+                     $('#passcheck').focus();
+                     $('#passcheck').css("color","orange");
+                     pass_err = false;
+                     return false;
+                     }
+                     else{
+                         $('#passcheck').hide();
+                       }
+                   }
+
+                   $('#conpassword').keyup(function(){
+                        conpassword_check();
+                       });
+                          function conpassword_check(){
+                          var pass_val = $('#password').val();
+                          var conpass_val = $('#conpassword').val();
+                          if(pass_val != conpass_val){
+                          $('#conpasscheck').show();
+                          $('#conpasscheck').html("WARNING: Passwords are not matching");
+                          $('#conpasscheck').focus();
+                          $('#conpasscheck').css("color","orange");
+                          conpass_err = false;
+                          return false;
+                          }
+                          else{
+                              $('#conpasscheck').hide();
+                            }
+                          }
+          });
+          $('body').css('background-image','url("https://img.kapital.kz/TqhPr4jyvTE/czM6Ly9rYXBpdGFsLXN0YXRpYy9pbWcvNC80LzcvZi8zLzFkNzQ3YjBhZjIyOWQzNmNmMTQ5YjIzMzUzYS5qcGc")');
+      </script>
+  </body>
+</html>
